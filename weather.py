@@ -1,5 +1,5 @@
 from typing import Any
-
+import os
 import httpx
 from mcp.server.fastmcp import FastMCP
 
@@ -93,9 +93,7 @@ Forecast: {period["detailedForecast"]}
 #     # Initialize and run the server
 #     mcp.run(transport="sse")
 
-
-    
-import os
+ 
 
 def main():
     port = int(os.environ.get("PORT", 8000))
