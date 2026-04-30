@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir \
     fastmcp \
     httpx
 
-CMD ["python", "weather.py", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "weather.py"]
