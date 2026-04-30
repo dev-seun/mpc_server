@@ -16,8 +16,8 @@ from langchain_openai import ChatOpenAI
 
 client = MultiServerMCPClient({
     "weather": {
-        "url": "http://127.0.0.1:8000",
-        "transport": "stdio",
+        "url": "https://mpc-server-pq34.onrender.com",
+        "transport": "sse",
         # "headers": {"Content-Type": "text/stream"}
     }
 })
@@ -30,6 +30,7 @@ async def get_agent():
     return agent
  
 async def main():
+    print("Agent Main: ---------------")
     agent = await get_agent()
     response = await agent.ainvoke({
         "messages": [
