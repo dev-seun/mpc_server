@@ -4,7 +4,7 @@ from fastmcp import FastMCP
 
 from infers import OrdersModel 
 
-mcp: Any = FastMCP("shop", debug=True, log_level="INFO")
+mcp: FastMCP = FastMCP("shop")
 
 from helper_functions import cancel_order, get_users, find_user, find_product, list_products,  all_orders, find_product_by_name, place_user_order, reset_data, to_dict
 
