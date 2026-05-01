@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir \
     fastmcp \
     httpx
 
-CMD ["python", "weather.py"]
+CMD ["python", "main.py"]
