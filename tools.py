@@ -1,6 +1,6 @@
 from typing import Any, List, Dict
 import uuid
-from  mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
 from infers import OrdersModel 
 
