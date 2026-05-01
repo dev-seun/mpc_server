@@ -1,18 +1,31 @@
 from typing import Any, List, Dict
 import uuid
-from  fastmcp import FastMCP
+from  mcp.server.fastmcp import FastMCP
 
 from infers import OrdersModel 
 
-mcp: Any = FastMCP("shop")
+mcp: Any = FastMCP("shop", debug=True, log_level="INFO")
 
-from helper_functions import cancel_order, find_user, find_product,  all_orders, find_product_by_name, place_user_order, reset_data, to_dict
+from helper_functions import cancel_order, get_users, find_user, find_product, list_products,  all_orders, find_product_by_name, place_user_order, reset_data, to_dict
+
+@mcp.tool()
+def users() -> list[Dict]:
+    """Return a list of all users."""
+    return to_dict(get_users())
+
+@mcp.tool()
+def orders() -> list[Dict]:
+    """Return a list of all orders."""
+    return to_dict(all_orders)
 
 @mcp.tool()
 def login_user(email: str, pin: str) -> str:
     """Authenticate a user using email and 4-digit PIN."""
     user = find_user(email)
-
+    print("================ Login Attempt =================")
+    print(f"Email: {email}, User found: {bool(user)}")
+    print("================ Email Attempt =================")
+    
     if not user:
         return "User not found."
 
@@ -28,6 +41,13 @@ def search_products(query: str) -> List[Dict]:
     results = find_product_by_name(query)
 
     return (to_dict(results) if results else [])
+
+@mcp.tool()
+def list_available_products() -> List[Dict]:
+    """List all available products."""
+    products = list_products()
+
+    return (to_dict(products) if products else []) 
 
 @mcp.tool()
 def search_products_by_sku(sku: str) -> List[Dict]:
@@ -108,3 +128,6 @@ def reset_inventory(phrase: str) -> str:
         return "Invalid command phrase."
     reset_data()
     return "Inventory, orders reset to initial stock levels and orders."
+
+
+ 
